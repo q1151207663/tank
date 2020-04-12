@@ -9,9 +9,7 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 	
-	int x = 200 , y = 200;
-	Dir dir = Dir.UP;//初始默认方向
-	private final int DISTANCE = 10;
+	Tank myTank = new Tank(200 ,200 ,Dir.UP);
 	
 	public TankFrame(){
 		setSize(800 ,600);
@@ -32,21 +30,8 @@ public class TankFrame extends Frame {
 	
 	@Override
 	public void paint(Graphics g) {
-		g.fillRect(x, y, 50, 50);
-		switch(dir) {
-		case LEFT:
-			x -= DISTANCE;
-			break;
-		case RIGHT:
-			x += DISTANCE;
-			break;
-		case UP:
-			y -= DISTANCE;
-			break;
-		case DOWN:
-			y += DISTANCE;
-			break;
-		}
+		//如果将tank的属性拿出来给别人画，就在一定程度上破坏了它的封装性
+		myTank.paint(g);
 	}
 	
 	
@@ -105,11 +90,14 @@ public class TankFrame extends Frame {
 		}
 		
 		
+		/**
+		 * i 设置方向
+		 */
 		private void setGoodTankDir() {
-			if(bL) dir = Dir.LEFT;
-			if(bR) dir = Dir.RIGHT;
-			if(bU) dir = Dir.UP;
-			if(bD) dir = Dir.DOWN;
+			if(bL) myTank.setDir( Dir.LEFT );
+			if(bR) myTank.setDir( Dir.RIGHT );
+			if(bU) myTank.setDir( Dir.UP );
+			if(bD) myTank.setDir( Dir.DOWN );
 			
 		}
 		
