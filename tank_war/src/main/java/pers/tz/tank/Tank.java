@@ -7,6 +7,7 @@ public class Tank {
 	private Dir dir = Dir.UP;//初始默认方向
 	private final int SPEED = 5;
 	private boolean moving = false;
+	private final int T_WIDTH = ResourceMgr.tankU.getWidth() ,T_HEIGHT = ResourceMgr.tankU.getHeight();
 	TankFrame tf;
 	
 	public Tank(int x, int y, Dir dir ,TankFrame tf) {
@@ -73,7 +74,9 @@ public class Tank {
 		//如果不清楚，存在内存泄漏的风险
 		//java中的内存泄漏经常是和容器有关系的，因为它可以无限扩容
 		//因此在使用容器时，需要尤为小心
-		tf.bullets.add( new Bullet(this.x ,this.y ,this.dir ,this.tf) );
+		int bX = this.x+this.T_WIDTH/2-ResourceMgr.bulletU.getWidth()/2;
+		int bY = this.y+this.T_HEIGHT/2-ResourceMgr.bulletU.getHeight()/2;
+		tf.bullets.add( new Bullet(bX ,bY ,this.dir ,this.tf) );
 	}
 	
 	
