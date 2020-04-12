@@ -7,7 +7,7 @@ public class Main {
 		
 		while(true) {
 			Thread.sleep(50);
-			tf.repaint();
+			tf.repaint();//Frame的方法，它会调用paint
 		}
 		
 	}
