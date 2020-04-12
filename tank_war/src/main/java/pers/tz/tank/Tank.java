@@ -17,7 +17,8 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
-		g.fillRect(x, y, 50, 50);
+		g.drawImage(ResourceMgr.tankU, x, y, null);
+		
 		if(moving) move();
 	}
 
