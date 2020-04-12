@@ -1,6 +1,7 @@
 package pers.tz.tank;
 
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -22,6 +23,12 @@ public class TankFrame extends Frame {
 		});
 	}
 	
+	
+	@Override
+	public void paint(Graphics g) {
+		g.fillRect(200, 200, 50, 50);
+		
+	}
 	
 	
 }
