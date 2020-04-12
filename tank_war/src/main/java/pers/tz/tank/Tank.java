@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Tank {
 	private int x ,y;
 	private Dir dir = Dir.UP;//初始默认方向
-	private final int DISTANCE = 10;
+	private final int SPEED = 5;
 	private boolean moving = false;
 	
 	public Tank(int x, int y, Dir dir) {
@@ -22,16 +22,16 @@ public class Tank {
 	private void move() {
 		switch(dir) {
 			case LEFT:
-				x -= DISTANCE;
+				x -= SPEED;
 				break;
 			case RIGHT:
-				x += DISTANCE;
+				x += SPEED;
 				break;
 			case UP:
-				y -= DISTANCE;
+				y -= SPEED;
 				break;
 			case DOWN:
-				y += DISTANCE;
+				y += SPEED;
 				break;
 		}			
 	}

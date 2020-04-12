@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 	
 	Tank myTank = new Tank(200 ,200 ,Dir.UP);
+	Bullet b = new Bullet(300 ,400 ,Dir.UP);
 	
 	public TankFrame(){
 		setSize(800 ,600);
@@ -32,6 +33,7 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		//如果将tank的属性拿出来给别人画，就在一定程度上破坏了它的封装性
 		myTank.paint(g);
+		b.paint(g);
 	}
 	
 	
