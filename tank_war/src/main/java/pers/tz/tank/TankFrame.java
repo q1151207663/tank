@@ -65,10 +65,9 @@ public class TankFrame extends Frame {
 				case KeyEvent.VK_UP:
 					bU = true;
 			}
-			
 			setGoodTankDir();//改变自己tank的方向
+			setGoodTankMoving();//改变自己tank是否移动
 		}
-
 
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -87,6 +86,7 @@ public class TankFrame extends Frame {
 					bU = false;
 			}
 			setGoodTankDir();//改变自己tank的方向
+			setGoodTankMoving();
 		}
 		
 		
@@ -94,10 +94,23 @@ public class TankFrame extends Frame {
 		 * i 设置方向
 		 */
 		private void setGoodTankDir() {
+			
 			if(bL) myTank.setDir( Dir.LEFT );
 			if(bR) myTank.setDir( Dir.RIGHT );
 			if(bU) myTank.setDir( Dir.UP );
 			if(bD) myTank.setDir( Dir.DOWN );
+			
+		}
+		
+		/**
+		 * i 设置是否移动
+		 * i 规则是：
+		 * 1 只要有任何一个方向键处于被按下的状态，就一直移动
+		 * 2 如果所有的方向键都没有被按下，就停止
+		 */
+		private void setGoodTankMoving() {
+			if(bL || bR || bU || bD) myTank.setMoving(true);
+			if(!bL && !bR && !bU && !bD) myTank.setMoving(false);
 			
 		}
 		
