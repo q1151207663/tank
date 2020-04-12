@@ -8,11 +8,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankFrame extends Frame {
 	
 	Tank myTank = new Tank(200 ,200 ,Dir.UP ,this);
-	Bullet b = new Bullet(300 ,400 ,Dir.UP);
+	List<Bullet> bullets = new ArrayList<>();
 	private static final int GAME_WIDTH = 800 ,GAME_HEIGHT = 600;
 	Image offScreenImage = null ;
 	
@@ -39,7 +41,9 @@ public class TankFrame extends Frame {
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
 		myTank.paint(g);
-		b.paint(g);
+		for( Bullet bullet : bullets ) {
+			bullet.paint(g);
+		}
 	}
 	
 	
