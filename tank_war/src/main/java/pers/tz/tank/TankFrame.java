@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 	
-	Tank myTank = new Tank(200 ,200 ,Dir.UP);
+	Tank myTank = new Tank(200 ,200 ,Dir.UP ,this);
 	Bullet b = new Bullet(300 ,400 ,Dir.UP);
 	private static final int GAME_WIDTH = 800 ,GAME_HEIGHT = 600;
 	Image offScreenImage = null ;
@@ -108,6 +108,10 @@ public class TankFrame extends Frame {
 					break;
 				case KeyEvent.VK_UP:
 					bU = false;
+					break ;
+				case KeyEvent.VK_CONTROL:
+					myTank.fire();
+					break ;
 			}
 			setGoodTankDir();//改变自己tank的方向
 			setGoodTankMoving();

@@ -7,11 +7,13 @@ public class Tank {
 	private Dir dir = Dir.UP;//初始默认方向
 	private final int SPEED = 5;
 	private boolean moving = false;
+	TankFrame tf;
 	
-	public Tank(int x, int y, Dir dir) {
+	public Tank(int x, int y, Dir dir ,TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tf = tf;
 	}
 
 	public void paint(Graphics g) {
@@ -50,6 +52,10 @@ public class Tank {
 
 	public void setMoving(boolean moving) {
 		this.moving = moving;
+	}
+
+	public void fire() {
+		tf.b = new Bullet(this.x ,this.y ,this.dir);
 	}
 	
 	

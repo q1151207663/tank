@@ -23,7 +23,7 @@ public class Bullet {
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.RED);
-		g.fillOval(x, y, 5, 5);
+		g.fillOval(x, y, 30, 30);
 		g.setColor(c);
 		
 		move();
@@ -31,18 +31,18 @@ public class Bullet {
 
 	private void move() {
 		switch(dir) {
-			case LEFT:
-				x -= SPEED;
-				break;
-			case RIGHT:
-				x += SPEED;
-				break;
-			case UP:
-				y -= SPEED;
-				break;
-			case DOWN:
-				y += SPEED;
-				break;
+		case LEFT:
+			x -= SPEED;
+			break;
+		case RIGHT:
+			x += SPEED;
+			break;
+		case UP:
+			y -= SPEED;
+			break;
+		case DOWN:
+			y += SPEED;
+			break;
 		}
 	}
 	
