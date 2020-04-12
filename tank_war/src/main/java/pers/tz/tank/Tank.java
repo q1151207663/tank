@@ -19,7 +19,7 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
-		if( !living ) return;
+		if( !living ) tf.badTank.remove(this);
 		
 		switch(dir) {
 			case LEFT:
