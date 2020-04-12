@@ -1,9 +1,7 @@
 package pers.tz.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
-
-import javax.annotation.Resource;
+import java.awt.Rectangle;
 
 /**
  * i 子弹类
@@ -11,7 +9,7 @@ import javax.annotation.Resource;
  *
  */
 public class Bullet {
-	private final int SPEED = 5;
+	private final int SPEED = 10;
 	private int x,y;
 	private Dir dir;
 	private final int B_WIDTH = ResourceMgr.bulletU.getWidth() ,B_HEIGHT = ResourceMgr.bulletU.getHeight();
@@ -70,6 +68,28 @@ public class Bullet {
 	//子弹超出边界
 	private void checkLiving() {
 		if( x<0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT ) living = false;
+	}
+
+	//碰撞检测
+	public void collideWith(Tank tank) {
+		
+		//具象
+		Rectangle bRect = new Rectangle(this.x ,this.y ,this.B_WIDTH ,this.B_HEIGHT);
+		Rectangle tRect = new Rectangle(tank.getX() ,tank.getY() ,tank.getT_WIDTH() ,tank.getT_HEIGHT());
+		if( bRect.intersects(tRect) ) {
+			tank.die();
+			this.die();
+		}
+	}
+
+	private void die() {
+		this.living = false;
+	}
+
+	@Override
+	public String toString() {
+		return "Bullet [SPEED=" + SPEED + ", x=" + x + ", y=" + y + ", dir=" + dir + ", B_WIDTH=" + B_WIDTH
+				+ ", B_HEIGHT=" + B_HEIGHT + ", living=" + living + "]";
 	}
 	
 	

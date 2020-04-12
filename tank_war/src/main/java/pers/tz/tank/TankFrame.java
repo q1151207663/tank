@@ -42,12 +42,21 @@ public class TankFrame extends Frame {
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
 		g.drawString("子弹："+bullets.size(), 10, 60);
+		g.drawString("敌方坦克数量："+badTank.size(), 10, 80);
 		myTank.paint(g);
 		for( int i=0 ;i<bullets.size() ;i++ ) 
 			bullets.get(i).paint(g);
 		
 		for( int i=0 ;i<badTank.size();i++ ) 
 			badTank.get(i).paint(g);
+		
+		//碰撞检测
+		for( int i=0;i<bullets.size() ;i++ ) {
+			for( int j=0 ;j<badTank.size() ;j++ ) {
+				bullets.get(i).collideWith(badTank.get(j));
+			}
+		}
+				
 		
 	}
 	

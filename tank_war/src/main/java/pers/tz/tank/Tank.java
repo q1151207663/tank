@@ -9,6 +9,7 @@ public class Tank {
 	private boolean moving = false;
 	private final int T_WIDTH = ResourceMgr.tankU.getWidth() ,T_HEIGHT = ResourceMgr.tankU.getHeight();
 	TankFrame tf;
+	private boolean living = true ;
 	
 	public Tank(int x, int y, Dir dir ,TankFrame tf) {
 		this.x = x;
@@ -18,6 +19,8 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
+		if( !living ) return;
+		
 		switch(dir) {
 			case LEFT:
 				g.drawImage(ResourceMgr.tankL, x, y, null);
@@ -77,6 +80,40 @@ public class Tank {
 		int bX = this.x+this.T_WIDTH/2-ResourceMgr.bulletU.getWidth()/2;
 		int bY = this.y+this.T_HEIGHT/2-ResourceMgr.bulletU.getHeight()/2;
 		tf.bullets.add( new Bullet(bX ,bY ,this.dir ,this.tf) );
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getT_WIDTH() {
+		return T_WIDTH;
+	}
+
+	public int getT_HEIGHT() {
+		return T_HEIGHT;
+	}
+
+	public void die() {
+		this.living = false ;
+	}
+
+	@Override
+	public String toString() {
+		return "Tank [x=" + x + ", y=" + y + ", dir=" + dir + ", SPEED=" + SPEED + ", moving=" + moving + ", T_WIDTH="
+				+ T_WIDTH + ", T_HEIGHT=" + T_HEIGHT + ", living=" + living + "]";
 	}
 	
 	
