@@ -5,6 +5,10 @@ public class Main {
 		
 		TankFrame tf = new TankFrame();
 		
+		//初始化敌方坦克
+		for( int i=0;i<5 ;i++ )
+			tf.badTank.add(new Tank(i*80 +50 ,200 ,Dir.LEFT ,tf));
+		
 		while(true) {
 			Thread.sleep(50);
 			tf.repaint();//Frame的方法，它会调用paint
