@@ -55,7 +55,10 @@ public class Tank {
 	}
 
 	public void fire() {
-		tf.bullets.add( new Bullet(this.x ,this.y ,this.dir) );
+		//如果不清楚，存在内存泄漏的风险
+		//java中的内存泄漏经常是和容器有关系的，因为它可以无限扩容
+		//因此在使用容器时，需要尤为小心
+		tf.bullets.add( new Bullet(this.x ,this.y ,this.dir ,this.tf) );
 	}
 	
 	

@@ -15,7 +15,7 @@ public class TankFrame extends Frame {
 	
 	Tank myTank = new Tank(200 ,200 ,Dir.UP ,this);
 	List<Bullet> bullets = new ArrayList<>();
-	private static final int GAME_WIDTH = 800 ,GAME_HEIGHT = 600;
+	static final int GAME_WIDTH = 800 ,GAME_HEIGHT = 600;
 	Image offScreenImage = null ;
 	
 	public TankFrame(){
@@ -40,6 +40,7 @@ public class TankFrame extends Frame {
 		//如果将tank的属性拿出来给别人画，就在一定程度上破坏了它的封装性
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
+		g.drawString("子弹："+bullets.size(), 10, 60);
 		myTank.paint(g);
 		for( Bullet bullet : bullets ) {
 			bullet.paint(g);
