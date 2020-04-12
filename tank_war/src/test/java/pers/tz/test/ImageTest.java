@@ -20,7 +20,8 @@ class ImageTest {
 	@Test
 	void test() {
 		try {
-			BufferedImage image = ImageIO.read(new File("D:/学习相关/tank war静态资源/资源/images/BadTank2.png"));
+//			BufferedImage image = ImageIO.read(new File("D:/学习相关/tank war静态资源/资源/images/BadTank2.png"));
+			BufferedImage image = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("images/BadTank2.png"));
 			assertNotNull(image);
 		} catch (IOException e) {
 			e.printStackTrace();
