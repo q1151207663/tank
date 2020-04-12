@@ -4,9 +4,10 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class TankFrame extends Frame {
+	
+	int x = 200 , y = 200;
 	
 	public TankFrame(){
 		setSize(800 ,600);
@@ -26,8 +27,10 @@ public class TankFrame extends Frame {
 	
 	@Override
 	public void paint(Graphics g) {
+		System.out.println("paint");
 		g.fillRect(200, 200, 50, 50);
-		
+		x += 10;
+		y += 10;
 	}
 	
 	
