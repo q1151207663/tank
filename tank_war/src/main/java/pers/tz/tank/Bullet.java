@@ -16,13 +16,15 @@ public class Bullet {
 	TankFrame tf ;
 	
 	private boolean living = true;
+	private Group group ;
 	
-	public Bullet(int x, int y, Dir dir ,TankFrame tf) {
+	public Bullet(int x, int y, Dir dir ,TankFrame tf ,Group group) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
+		this.group = group;
 	}
 	
 	public void paint(Graphics g) {
@@ -70,9 +72,9 @@ public class Bullet {
 		if( x<0 || y<0 || x>TankFrame.GAME_WIDTH || y>TankFrame.GAME_HEIGHT ) living = false;
 	}
 
-	//碰撞检测
+	//碰撞检测 用一个Rectangle，new的太频繁导致gc频繁
 	public void collideWith(Tank tank) {
-		
+		if( this.group==tank.getGroup() ) return ;
 		//具象
 		Rectangle bRect = new Rectangle(this.x ,this.y ,this.B_WIDTH ,this.B_HEIGHT);
 		Rectangle tRect = new Rectangle(tank.getX() ,tank.getY() ,tank.getT_WIDTH() ,tank.getT_HEIGHT());

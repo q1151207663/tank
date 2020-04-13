@@ -1,21 +1,25 @@
 package pers.tz.tank;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Tank {
 	private int x ,y;
 	private Dir dir = Dir.UP;//初始默认方向
 	private final int SPEED = 5;
-	private boolean moving = false;
+	private boolean moving = true;
 	private final int T_WIDTH = ResourceMgr.tankU.getWidth() ,T_HEIGHT = ResourceMgr.tankU.getHeight();
 	TankFrame tf;
 	private boolean living = true ;
+	private Random random = new Random();
+	private Group group ;
 	
-	public Tank(int x, int y, Dir dir ,TankFrame tf) {
+	public Tank(int x, int y, Dir dir ,TankFrame tf ,Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
+		this.group = group;
 	}
 
 	public void paint(Graphics g) {
@@ -54,7 +58,21 @@ public class Tank {
 			case DOWN:
 				y += SPEED;
 				break;
-		}			
+		}
+		
+		randomFire();
+		
+		randomDir();
+	}
+
+	private void randomFire() {
+		if( random.nextInt(10)>8 ) this.fire();
+		
+	}
+
+	private void randomDir() {
+		
+		
 	}
 
 	public Dir getDir() {
@@ -79,7 +97,17 @@ public class Tank {
 		//因此在使用容器时，需要尤为小心
 		int bX = this.x+this.T_WIDTH/2-ResourceMgr.bulletU.getWidth()/2;
 		int bY = this.y+this.T_HEIGHT/2-ResourceMgr.bulletU.getHeight()/2;
-		tf.bullets.add( new Bullet(bX ,bY ,this.dir ,this.tf) );
+		tf.bullets.add( new Bullet(bX ,bY ,this.dir ,this.tf ,this.group) );
+	}
+
+	
+	
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	public int getX() {
