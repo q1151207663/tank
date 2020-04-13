@@ -15,6 +15,8 @@ public class Bullet {
 	private final int B_WIDTH = ResourceMgr.bulletU.getWidth() ,B_HEIGHT = ResourceMgr.bulletU.getHeight();
 	TankFrame tf ;
 	
+	Rectangle bRect = new Rectangle();
+	
 	private boolean living = true;
 	private Group group ;
 	
@@ -25,6 +27,11 @@ public class Bullet {
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		
+		bRect.x = x;
+		bRect.y = y;
+		bRect.width = B_WIDTH ;
+		bRect.height = B_HEIGHT;
 	}
 	
 	public void paint(Graphics g) {
@@ -65,6 +72,14 @@ public class Bullet {
 		}
 		
 		checkLiving();
+		
+		//更新rect的值
+		updateRect();
+	}
+
+	private void updateRect() {
+		bRect.x = x;
+		bRect.y = y;
 	}
 
 	//子弹超出边界
@@ -76,12 +91,9 @@ public class Bullet {
 	public void collideWith(Tank tank) {
 		if( this.group==tank.getGroup() ) return ;
 		//具象
-		Rectangle bRect = new Rectangle(this.x ,this.y ,this.B_WIDTH ,this.B_HEIGHT);
-		Rectangle tRect = new Rectangle(tank.getX() ,tank.getY() ,tank.getT_WIDTH() ,tank.getT_HEIGHT());
-		if( bRect.intersects(tRect) ) {
+		if( bRect.intersects(tank.tRect) ) {
 			tank.die();
 			this.die();
-			
 			int eX = this.x+this.B_WIDTH/2-ResourceMgr.exlodes[0].getWidth()/2;
 			int eY = this.y+this.B_HEIGHT/2-ResourceMgr.exlodes[0].getHeight()/2;
 			tf.explodes.add(new Explode(eX ,eY ,tf));

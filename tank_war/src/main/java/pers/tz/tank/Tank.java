@@ -1,6 +1,7 @@
 package pers.tz.tank;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 public class Tank {
@@ -13,6 +14,7 @@ public class Tank {
 	private boolean living = true ;
 	private Random random = new Random();
 	private Group group ;
+	public Rectangle tRect = new Rectangle();
 	
 	public Tank(int x, int y, Dir dir ,TankFrame tf ,Group group) {
 		this.x = x;
@@ -20,6 +22,11 @@ public class Tank {
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		
+		tRect.x = x;
+		tRect.y = y;
+		tRect.width = T_WIDTH ;
+		tRect.height = T_HEIGHT;
 	}
 
 	public void paint(Graphics g) {
@@ -65,6 +72,13 @@ public class Tank {
 		randomDir();
 		
 		boundsCheck();
+		
+		updateRect();
+	}
+
+	private void updateRect() {
+		tRect.x = x;
+		tRect.y = y;		
 	}
 
 	private void boundsCheck() {
