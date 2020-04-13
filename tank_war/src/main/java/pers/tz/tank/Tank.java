@@ -63,6 +63,15 @@ public class Tank {
 		randomFire();
 		
 		randomDir();
+		
+		boundsCheck();
+	}
+
+	private void boundsCheck() {
+		if( x<0 ) x = 0;
+		if( y<30 ) y = 30;
+		if( x>TankFrame.GAME_WIDTH-T_WIDTH ) x = TankFrame.GAME_WIDTH-T_WIDTH;
+		if( y>TankFrame.GAME_HEIGHT-T_HEIGHT ) y = TankFrame.GAME_HEIGHT-T_HEIGHT;
 	}
 
 	private void randomFire() {
