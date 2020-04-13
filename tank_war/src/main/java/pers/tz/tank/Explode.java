@@ -1,13 +1,12 @@
 package pers.tz.tank;
 
 import java.awt.Graphics;
-import java.util.Random;
 
 public class Explode {
 	private int x ,y;
 	private final int T_WIDTH = ResourceMgr.exlodes[0].getWidth() ,T_HEIGHT = ResourceMgr.exlodes[0].getHeight();
 	TankFrame tf;
-	private boolean living = true ;
+//	private boolean living = true ;
 	
 	private int step = 0 ;
 	
@@ -15,6 +14,7 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
+		new Audio("audio/explode.wav").start();
 	}
 
 	public void paint(Graphics g) {
@@ -47,9 +47,6 @@ public class Explode {
 		return T_HEIGHT;
 	}
 
-	public void die() {
-		this.living = false ;
-	}
 
 	
 	

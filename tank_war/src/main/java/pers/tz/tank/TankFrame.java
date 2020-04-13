@@ -13,6 +13,8 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 	
+	private static final long serialVersionUID = 1L;
+	
 	Tank myTank = new Tank(200 ,400 ,Dir.UP ,this ,Group.GOOD);
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> badTank = new ArrayList<>();
@@ -41,7 +43,6 @@ public class TankFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		//如果将tank的属性拿出来给别人画，就在一定程度上破坏了它的封装性
-		Color c = g.getColor();
 		g.setColor(Color.WHITE);
 		g.drawString("子弹："+bullets.size(), 10, 60);
 		g.drawString("敌方坦克数量："+badTank.size(), 10, 80);
