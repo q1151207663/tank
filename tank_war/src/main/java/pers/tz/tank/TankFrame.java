@@ -18,10 +18,9 @@ public class TankFrame extends Frame {
 	Tank myTank = new Tank(200 ,400 ,Dir.UP ,this ,Group.GOOD);
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> badTank = new ArrayList<>();
-	List<Explode> explods = new ArrayList<>();
 	static final int GAME_WIDTH = 1080 ,GAME_HEIGHT = 960;
 	Image offScreenImage = null ;
-	Explode e = new Explode(100, 100, this);
+	List<Explode> explodes = new ArrayList<>();
 	
 	public TankFrame(){
 		setSize(GAME_WIDTH ,GAME_HEIGHT);
@@ -46,6 +45,7 @@ public class TankFrame extends Frame {
 		g.setColor(Color.WHITE);
 		g.drawString("子弹："+bullets.size(), 10, 60);
 		g.drawString("敌方坦克数量："+badTank.size(), 10, 80);
+		g.drawString("爆炸数量："+explodes.size(), 10, 100);
 		myTank.paint(g);
 		for( int i=0 ;i<bullets.size() ;i++ ) 
 			bullets.get(i).paint(g);
@@ -53,8 +53,8 @@ public class TankFrame extends Frame {
 		for( int i=0 ;i<badTank.size();i++ ) 
 			badTank.get(i).paint(g);
 		
-//		for( int i=0 ;i<explods.size();i++ ) 
-//			explods.get(i).paint(g);
+		for( int i=0 ;i<explodes.size();i++ ) 
+			explodes.get(i).paint(g);
 		
 		//碰撞检测
 		for( int i=0;i<bullets.size() ;i++ ) {
@@ -63,7 +63,6 @@ public class TankFrame extends Frame {
 			}
 		}
 		
-		e.paint(g);
 		
 	}
 	

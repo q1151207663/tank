@@ -14,12 +14,15 @@ public class Explode {
 		this.x = x;
 		this.y = y;
 		this.tf = tf;
-		new Audio("audio/explode.wav").start();
+//		new Audio("audio/explode.wav").start();
 	}
 
 	public void paint(Graphics g) {
 		g.drawImage(ResourceMgr.exlodes[step++] ,x ,y ,null);
-		if( step>=ResourceMgr.exlodes.length ) step=0;
+		if( step>=ResourceMgr.exlodes.length ) {
+			step=0;
+			tf.explodes.remove(this);
+		}
 	}
 
 
