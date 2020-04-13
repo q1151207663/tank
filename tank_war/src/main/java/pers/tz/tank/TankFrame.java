@@ -19,6 +19,7 @@ public class TankFrame extends Frame {
 	List<Explode> explods = new ArrayList<>();
 	static final int GAME_WIDTH = 1080 ,GAME_HEIGHT = 960;
 	Image offScreenImage = null ;
+	Explode e = new Explode(100, 100, this);
 	
 	public TankFrame(){
 		setSize(GAME_WIDTH ,GAME_HEIGHT);
@@ -61,6 +62,7 @@ public class TankFrame extends Frame {
 			}
 		}
 		
+		e.paint(g);
 		
 	}
 	

@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
  */
 public class ResourceMgr {
 	public static BufferedImage tankL ,tankR ,tankU ,tankD;
-	
 	public static BufferedImage bulletL ,bulletR ,bulletU ,bulletD;
+	public static BufferedImage[] exlodes = new BufferedImage[16];
 	
 	static {
 		try {
@@ -27,6 +27,9 @@ public class ResourceMgr {
 			bulletL = ImageUtil.rotateImage(bulletU, -90);
 			bulletR = ImageUtil.rotateImage(bulletU, 90);
 			bulletD = ImageUtil.rotateImage(bulletU, 180);
+			
+			for( int i=1 ;i<=exlodes.length ;i++ )
+				exlodes[i-1] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e"+ i +".gif"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
