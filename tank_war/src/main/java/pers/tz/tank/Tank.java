@@ -6,7 +6,7 @@ import java.util.Random;
 public class Tank {
 	private int x ,y;
 	private Dir dir = Dir.UP;//初始默认方向
-	private final int SPEED = 5;
+	private final int SPEED = 2;
 	private boolean moving = true;
 	private final int T_WIDTH = ResourceMgr.tankU.getWidth() ,T_HEIGHT = ResourceMgr.tankU.getHeight();
 	TankFrame tf;
@@ -66,13 +66,13 @@ public class Tank {
 	}
 
 	private void randomFire() {
-		if( random.nextInt(10)>8 ) this.fire();
-		
+		if( random.nextInt(10)>8 && group==Group.BAD )
+			this.fire();
 	}
 
 	private void randomDir() {
-		
-		
+		if( random.nextInt(100)>97 && group==Group.BAD )
+			this.dir = Dir.values()[random.nextInt(4)];
 	}
 
 	public Dir getDir() {
