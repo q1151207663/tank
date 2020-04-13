@@ -8,7 +8,7 @@ public class Tank {
 	private Dir dir = Dir.UP;//初始默认方向
 	private final int SPEED = 2;
 	private boolean moving = true;
-	private final int T_WIDTH = ResourceMgr.tankU.getWidth() ,T_HEIGHT = ResourceMgr.tankU.getHeight();
+	private final int T_WIDTH = ResourceMgr.goodTankU.getWidth() ,T_HEIGHT = ResourceMgr.goodTankU.getHeight();
 	TankFrame tf;
 	private boolean living = true ;
 	private Random random = new Random();
@@ -27,16 +27,16 @@ public class Tank {
 		
 		switch(dir) {
 			case LEFT:
-				g.drawImage(ResourceMgr.tankL, x, y, null);
+				g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankL:ResourceMgr.badTankL, x, y, null);
 				break;
 			case RIGHT:
-				g.drawImage(ResourceMgr.tankR, x, y, null);
+				g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankR:ResourceMgr.badTankR, x, y, null);
 				break;
 			case UP:
-				g.drawImage(ResourceMgr.tankU, x, y, null);
+				g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankU:ResourceMgr.badTankU, x, y, null);
 				break;
 			case DOWN:
-				g.drawImage(ResourceMgr.tankD, x, y, null);
+				g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankD:ResourceMgr.badTankD, x, y, null);
 				break;
 		}
 		
