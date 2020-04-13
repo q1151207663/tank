@@ -82,7 +82,9 @@ public class Bullet {
 			tank.die();
 			this.die();
 			
-			tf.explodes.add(new Explode(x ,y ,tf));
+			int eX = this.x+this.B_WIDTH/2-ResourceMgr.exlodes[0].getWidth()/2;
+			int eY = this.y+this.B_HEIGHT/2-ResourceMgr.exlodes[0].getHeight()/2;
+			tf.explodes.add(new Explode(eX ,eY ,tf));
 		}
 	}
 
