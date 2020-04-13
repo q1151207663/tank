@@ -4,9 +4,12 @@ public class Main {
 	public static void main(String[] args) throws Throwable{
 		
 		TankFrame tf = new TankFrame();
+		int initBadTankCount = Integer.parseInt( PropertyMgr.get("initBadTankCount") );
+		
+		if( initBadTankCount>15 ) System.exit(0);
 		
 		//初始化敌方坦克
-		for( int i=0;i<5 ;i++ )
+		for( int i=0;i<initBadTankCount ;i++ )
 			tf.badTank.add(new Tank(i*80 +50 ,200 ,Dir.DOWN ,tf ,Group.BAD));
 		
 		new Thread(()->new Audio("audio/war1.wav").loop()).start();
