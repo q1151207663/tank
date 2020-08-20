@@ -1,6 +1,7 @@
 package pers.tz.tank.net;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
@@ -90,6 +91,9 @@ public class Server {
 			f.channel().closeFuture().sync();//channel被close了 这行代码才会往下执行
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		} finally {
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
 		}
 		
 	}

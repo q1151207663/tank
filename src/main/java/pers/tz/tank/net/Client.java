@@ -27,9 +27,9 @@ public class Client {
 
 		try {
 			Bootstrap b = new Bootstrap();
-			ChannelFuture future = b.group(group).channel(NioSocketChannel.class)
+			ChannelFuture future = b.group(group)
+					.channel(NioSocketChannel.class)
 					.handler(new ChannelInitializer<SocketChannel>() {
-
 						@Override
 						protected void initChannel(SocketChannel ch) throws Exception {
 							ch.pipeline()
@@ -70,6 +70,8 @@ public class Client {
 							});
 						}
 					}).connect("localhost", 8889).sync();
+
+
 			future.addListener(new ChannelFutureListener() {
 				@Override
 				public void operationComplete(ChannelFuture future) throws Exception {

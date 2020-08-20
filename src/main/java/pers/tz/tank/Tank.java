@@ -1,20 +1,25 @@
 package pers.tz.tank;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.Random;
+import pers.tz.tank.net.ObjectMsg;
+import pers.tz.tank.net.TankJoinMsg;
+
+import java.awt.*;
+import java.util.*;
 
 public class Tank {
 	private int x ,y;
 	private Dir dir = Dir.UP;//初始默认方向
 	private final int SPEED = 2;
-	private boolean moving = true;
+	private boolean moving = false;
 	private final int T_WIDTH = ResourceMgr.goodTankU.getWidth() ,T_HEIGHT = ResourceMgr.goodTankU.getHeight();
 	TankFrame tf;
 	private boolean living = true ;
 	private Random random = new Random();
 	private Group group ;
 	public Rectangle tRect = new Rectangle();
+
+	public UUID id = UUID.randomUUID();
+
 	
 	public Tank(int x, int y, Dir dir ,TankFrame tf ,Group group) {
 		this.x = x;
@@ -29,9 +34,31 @@ public class Tank {
 		tRect.height = T_HEIGHT;
 	}
 
+
+	public Tank(TankJoinMsg msg) {
+		this.x = msg.x;
+		this.y = msg.y;
+		this.dir = msg.dir;
+		this.group = msg.group;
+
+		this.id = msg.id;//巨！坑！
+
+		tRect.x = x;
+		tRect.y = y;
+		tRect.width = T_WIDTH ;
+		tRect.height = T_HEIGHT;
+	}
+
+
+
 	public void paint(Graphics g) {
-		if( !living ) tf.badTank.remove(this);
-		
+//		if( !living ) tf.badTank.remove(this);
+
+		Color c = g.getColor();
+		g.setColor(Color.WHITE);
+		g.drawString("uuid："+this.id.toString(), this.x, this.y - 10);
+		g.setColor(c);
+
 		switch(dir) {
 			case LEFT:
 				g.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankL:ResourceMgr.badTankL, x, y, null);
@@ -161,15 +188,22 @@ public class Tank {
 		this.living = false ;
 	}
 
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Tank [x=" + x + ", y=" + y + ", dir=" + dir + ", SPEED=" + SPEED + ", moving=" + moving + ", T_WIDTH="
 				+ T_WIDTH + ", T_HEIGHT=" + T_HEIGHT + ", living=" + living + "]";
 	}
-	
-	
-	
-	
-	
+
+
+
+
 	
 }

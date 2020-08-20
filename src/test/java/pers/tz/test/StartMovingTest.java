@@ -1,15 +1,13 @@
 package pers.tz.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.UUID;
 
-import org.junit.jupiter.api.Test;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
+import org.junit.Test;
 import pers.tz.tank.Dir;
 import pers.tz.tank.Group;
 import pers.tz.tank.net.MsgType;
@@ -18,10 +16,12 @@ import pers.tz.tank.net.TankMsgDecoder;
 import pers.tz.tank.net.TankStartMovingMsg;
 import pers.tz.tank.net.TankMsgEncoder;
 
+import static org.junit.Assert.assertEquals;
+
 class StartMovingTest {
 
 	@Test
-	void encodeTest() {
+	public void encodeTest() {
 		
 		EmbeddedChannel ch = new EmbeddedChannel();
 		UUID id = UUID.randomUUID();
@@ -37,7 +37,7 @@ class StartMovingTest {
 		System.out.println(msgType);
 		assertEquals(MsgType.TankStartMoving, msgType);
 		
-		int len = buf.readInt();//长度
+		int len = buf.readInt();//4
 		assertEquals(28, len);
 		
 		
@@ -58,7 +58,7 @@ class StartMovingTest {
 	
 	
 	@Test
-	void testDecoder() {
+	public void testDecoder() {
 		EmbeddedChannel ch = new EmbeddedChannel();
 		UUID id = UUID.randomUUID();
 		TankStartMovingMsg tankMsg = new TankStartMovingMsg(id ,5 ,10 ,Dir.UP);

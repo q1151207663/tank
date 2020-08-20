@@ -9,9 +9,9 @@ public class TankMsgEncoder extends MessageToByteEncoder<ObjectMsg> {
 	@Override
 	protected void encode(ChannelHandlerContext ctx, ObjectMsg msg, ByteBuf out) throws Exception {
 		/**
-		 * 1.先写消息类型
-		 * 2.再写消息长度
-		 * 3.最后写消息数据
+		 * 1.先写消息类型		4
+		 * 2.再写消息长度		4
+		 * 3.最后写消息数据	x
 		 * 
 		 * 其实还应该写一个消息的校验和
 		 * 

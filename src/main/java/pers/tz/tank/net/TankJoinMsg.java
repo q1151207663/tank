@@ -65,7 +65,7 @@ public class TankJoinMsg extends ObjectMsg{
 			// TODO: handle exception
 		}finally {
 			try {
-				if(dis!=null) {
+				if(dis != null) {
 					dis.close();
 				}
 			} catch (IOException e) {
@@ -132,7 +132,7 @@ public class TankJoinMsg extends ObjectMsg{
 		 */
 		if( this.id.equals(TankFrame.INSTANCE.getMyTank().id) ||
 				TankFrame.INSTANCE.findByUUID(this.id) != null ) return ;
-		
+
 		Tank tank = new Tank(this);//将新加入的tank消息转化成tank对象
 		TankFrame.INSTANCE.addTank(tank);//将tank对象添加到HashMap
 	

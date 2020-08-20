@@ -8,21 +8,26 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 
 public class TankFrame extends Frame {
 	
 	private static final long serialVersionUID = 1L;
-	
-	Tank myTank = new Tank(200 ,400 ,Dir.UP ,this ,Group.GOOD);
+
+	public static final TankFrame INSTANCE = new TankFrame();
+	Random r = new Random();
+
+	Tank myTank = new Tank(r.nextInt(GAME_WIDTH), r.nextInt(GAME_HEIGHT) ,Dir.UP ,this ,Group.GOOD);
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank> badTank = new ArrayList<>();
 	static final int GAME_WIDTH = 1080 ,GAME_HEIGHT = 960;
 	Image offScreenImage = null ;
 	List<Explode> explodes = new ArrayList<>();
+
+	Map<UUID ,Tank> tanks = new HashMap<>();
 	
-	public TankFrame(){
+	private TankFrame(){
 		setSize(GAME_WIDTH ,GAME_HEIGHT);
 		setResizable(false);
 		setTitle("tank war");
@@ -42,24 +47,20 @@ public class TankFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		//如果将tank的属性拿出来给别人画，就在一定程度上破坏了它的封装性
-		g.setColor(Color.WHITE);
-		g.drawString("子弹："+bullets.size(), 10, 60);
-		g.drawString("敌方坦克数量："+badTank.size(), 10, 80);
-		g.drawString("爆炸数量："+explodes.size(), 10, 100);
 		myTank.paint(g);
-		for( int i=0 ;i<bullets.size() ;i++ ) 
-			bullets.get(i).paint(g);
-		
-		for( int i=0 ;i<badTank.size();i++ ) 
-			badTank.get(i).paint(g);
-		
-		for( int i=0 ;i<explodes.size();i++ ) 
-			explodes.get(i).paint(g);
+
+		tanks.values().forEach(e -> e.paint(g));
+
+		for (Bullet bullet : bullets) bullet.paint(g);
+
+		for (Tank tank : badTank) tank.paint(g);
+
+		for (Explode explode : explodes) explode.paint(g);
 		
 		//碰撞检测
-		for( int i=0;i<bullets.size() ;i++ ) {
-			for( int j=0 ;j<badTank.size() ;j++ ) {
-				bullets.get(i).collideWith(badTank.get(j));
+		for (Bullet bullet : bullets) {
+			for (Tank tank : badTank) {
+				bullet.collideWith(tank);
 			}
 		}
 		
@@ -167,6 +168,26 @@ public class TankFrame extends Frame {
 		}
 		
 	}
-	
-	
+
+
+	public Tank getMyTank() {
+		return myTank;
+	}
+
+	public void setMyTank(Tank myTank) {
+		this.myTank = myTank;
+	}
+
+
+
+
+	public void addTank(Tank tank) {
+		tanks.put(tank.id ,tank);
+	}
+
+
+	public Tank findByUUID(UUID id) {
+		return tanks.get(id);
+	}
+
 }
